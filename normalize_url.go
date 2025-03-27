@@ -5,17 +5,19 @@ import (
 	"strings"
 )
 
-// normalizeURL takes a raw URL and returns a normalized version without the scheme and trailing slash
 func normalizeURL(rawURL string) (string, error) {
 	parsedURL, err := url.Parse(rawURL)
 	if err != nil {
 		return "", err
 	}
 
-	// Remove scheme (http/https)
-	parsedURL.Scheme = ""
+	// Keep the scheme (http/https) for making requests
+	scheme := parsedURL.Scheme
+	if scheme == "" {
+		scheme = "https" // Default to HTTPS if missing
+	}
 
-	// Remove "www." prefix if present
+	// Remove "www." prefix for consistency
 	parsedURL.Host = strings.TrimPrefix(parsedURL.Host, "www.")
 
 	// Combine host and path
@@ -24,5 +26,6 @@ func normalizeURL(rawURL string) (string, error) {
 	// Remove trailing slash
 	normalized = strings.TrimSuffix(normalized, "/")
 
+	// Return normalized URL for tracking and full URL for requests
 	return normalized, nil
 }
