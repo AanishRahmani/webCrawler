@@ -21,8 +21,8 @@ To use this crawler, you need to have Go installed on your system.
 
 1. Clone this repository:
    ```sh
-   git clone https://github.com/yourusername/web-crawler.git
-   cd web-crawler
+   git clone https://github.com/yourusername/webCrawler.git
+   cd webCrawler
    ```
 2. Install dependencies (if any, but for now, standard Go packages are used).
 3. Build and run the program:
